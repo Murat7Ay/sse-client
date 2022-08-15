@@ -12,7 +12,9 @@ onMounted(() => {
   id.value = getChatId();
   evtSource = new EventSource('https://node-sse-server.herokuapp.com/events?id='+id.value);
   evtSource.onmessage = (e) => {
-    messages.value = [...messages.value,JSON.parse(e.data)]
+    let arr = [...messages.value,JSON.parse(e.data)]
+
+    messages.value = arr.slice(-5);
    }
 })
 
